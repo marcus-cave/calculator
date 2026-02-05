@@ -45,7 +45,7 @@ function operate(a, operator, b) {
 
     console.log(`${a} ${operator} ${b} = ${result}`)
 
-    updateActiveOperator("clear")
+    clearOperatorActive();
     display.textContent = result;
 
     operatorSet = false;
@@ -57,7 +57,11 @@ function operate(a, operator, b) {
 
 const display = document.querySelector("#display");
 const buttons = document.querySelectorAll("button");
+
 const addBtn = document.querySelector("button[value='+']");
+const subtractBtn = document.querySelector("button[value='-']");
+const multiplyBtn = document.querySelector("button[value='*']");
+const divideBtn = document.querySelector("button[value='/']");
 
 buttons.forEach((button) => {
     button.addEventListener("click", () => {
@@ -128,6 +132,7 @@ function clearScreen() {
     operator = "";
     result = null;
     display.textContent = "";
+    clearOperatorActive();
 
 };
 
@@ -144,16 +149,33 @@ function deleteLast() {
 };
 
 function updateActiveOperator(op) {
-    if (op === "clear") { clearOperatorActive(); return; };
 
     operator = op;
     operatorSet = true;
     console.log(`Operator: ${operator}`);
     display.textContent = "";
 
+    switch (operator) {
+        case "+":
+            addBtn.classList.add("active");
+            break;
+        case "-":
+            subtractBtn.classList.add("active");
+            break;
+        case "*":
+            multiplyBtn.classList.add("active");
+            break;
+        case "/":
+            divideBtn.classList.add("active");
+            break;
+    };
+
 }
 
 function clearOperatorActive() {
-    addBtn.classList.remove(".active");
+    addBtn.classList.remove("active");
+    subtractBtn.classList.remove("active")
+    multiplyBtn.classList.remove("active")
+    divideBtn.classList.remove("active")
 
 }
