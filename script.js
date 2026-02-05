@@ -22,12 +22,6 @@ function divide(a, b) {
 
 function operate(a, operator, b) {
 
-    console.log("**************")
-    console.log(`numberA: ${numberA}`);
-    console.log(`Operator: ${operator}`);
-    console.log(`numberB: ${numberB}`);
-    console.log("**************")
-
     a = parseFloat(a);
     b = parseFloat(b);
 
@@ -49,9 +43,13 @@ function operate(a, operator, b) {
     numberA = "";
     numberB = "";
 
+    console.log(`${a} ${operator} ${b} = ${result}`)
+
+    updateActiveOperator("clear")
     display.textContent = result;
 
     operatorSet = false;
+
 
 
     return result;
@@ -59,6 +57,7 @@ function operate(a, operator, b) {
 
 const display = document.querySelector("#display");
 const buttons = document.querySelectorAll("button");
+const addBtn = document.querySelector("button[value='+']");
 
 buttons.forEach((button) => {
     button.addEventListener("click", () => {
@@ -88,25 +87,22 @@ function handleButtonPress(type, value) {
             if (!numberA) {
                 console.log("TEST")
                 numberA = result;
-                operator = value;
-                console.log(`Operator: ${operator}`);
-                operatorSet = true;
-                display.textContent = "";
+
+                updateActiveOperator(value);
 
                 break;
             }
 
             if (!operatorSet) {
-                operator = value;
-                console.log(`Operator: ${operator}`);
-                operatorSet = true;
+
+                updateActiveOperator(value);
                 //display.textContent += value;
                 break;
             };
 
             operate(numberA, operator, numberB);
-            operator = value;
-            operatorSet = true;
+
+            updateActiveOperator(value);
             numberA = result;
 
             break;
@@ -120,6 +116,9 @@ function handleButtonPress(type, value) {
         case "clear":
             clearScreen();
             break;
+        case "delete":
+            deleteLast();
+            break;
     }
 };
 
@@ -129,5 +128,32 @@ function clearScreen() {
     operator = "";
     result = null;
     display.textContent = "";
+
+};
+
+function deleteLast() {
+    if (!operatorSet) {
+        display.textContent = "";
+        numberA = numberA.slice(0, -1);
+        display.textContent = numberA;
+    } else {
+        display.textContent = "";
+        numberB = numberB.slice(0, -1);
+        display.textContent = numberB;
+    }
+};
+
+function updateActiveOperator(op) {
+    if (op === "clear") { clearOperatorActive(); return; };
+
+    operator = op;
+    operatorSet = true;
+    console.log(`Operator: ${operator}`);
+    display.textContent = "";
+
+}
+
+function clearOperatorActive() {
+    addBtn.classList.remove(".active");
 
 }

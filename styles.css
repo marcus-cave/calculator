@@ -54,3 +54,6 @@ body {
     margin: 5px 5px;
 }
 
+.active {
+    background-color: pink;
+}
