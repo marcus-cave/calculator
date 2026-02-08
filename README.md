@@ -5,3 +5,5 @@ A simple, browser‑based calculator built as part of The Odin Project curriculu
 It performs basic arithmetic operations (+, -, /, *).
 
 ## View [Live Preview](https://marcus-cave.github.io/calculator/)
+
+<img src="images/example_screenshot.png" style="width: 500px" alt="Screenshot of Calculator Project"/>
