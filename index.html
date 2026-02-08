@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,18 +8,24 @@
     <script src="./script.js" defer></script>
     <title>Calculator</title>
 </head>
+
 <body>
     <div class="page">
         <div class="calculator">
             <div class="display">
-                <div><p id="displayEq">DisEq</p></div>
-                <div><p id="display">Display</p></div>
+                <div>
+                    <input type="text" value="" id="displayEq" class="press-start" disabled>
+                </div>
+                <div>
+                    <input type="text" value="" id="display" class="press-start" disabled>
+                </div>
             </div>
             <div class="buttons">
                 <button id="clear">C</button>
-                <button id=""></button>
-                <button id=""></button>
+               <!--<button id=""></button>-->
                 <button id="delete">&#9003;</button>
+                <button id="operator" value="-">&minus;</button>
+
                 <button id="number" value="7">7</button>
                 <button id="number" value="8">8</button>
                 <button id="number" value="9">9</button>
@@ -34,9 +41,20 @@
                 <button id="decimal" value=".">.</button>
                 <button id="number" value="0">0</button>
                 <button id="equal" value="=">=</button>
-                <button id="operator" value="-">&minus;</button>
             </div>
         </div>
     </div>
+
+    <footer class="footer">
+        <div>
+            <p>Copyright © 2026 - Marcus Cave</p>
+        </div>
+        <div>
+            <a href="https://github.com/mac-pac/etch-a-sketch" target="_blank" rel="noopener noreferer">
+                <img class="github-logo" src="./images/github-mark.svg" />
+            </a>
+        </div>
+    </footer>
 </body>
+
 </html>

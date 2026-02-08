@@ -30,13 +30,13 @@ function operate(a, operator, b) {
 
     if (isNaN(a) || isNaN(b)) {
         clearScreen();
-        display.textContent = "ERROR";
+        display.value = "ERROR";
         return;
     };
 
-    if (operator === "/" || b === 0) {
+    if (operator === "/" && b === 0) {
         clearScreen();
-        display.textContent = "ERROR - !DIV 0";
+        display.value = "ERROR - !DIV 0";
         return;
     };
 
@@ -59,11 +59,11 @@ function operate(a, operator, b) {
     numberB = "";
 
     console.log(`${a} ${operator} ${b} = ${result}`)
-    displayEq.textContent = `${a} ${operator} ${b}`;
+    displayEq.value = `${a} ${operator} ${b}`;
 
 
     clearOperatorActive();
-    display.textContent = result;
+    display.value = result;
     operatorSet = false;
 
     return result;
@@ -89,13 +89,15 @@ function handleButtonPress(type, value) {
     switch (type) {
         case "number":
             if (!operatorSet) {
-                display.textContent = "";
+                displayEq.value = "";
+                display.value = "";
                 numberA += value;
-                display.textContent = numberA;
+                display.value = numberA;
             } else {
-                display.textContent = "";
+                displayEq.value = "";
+                display.value = "";
                 numberB += value;
-                display.textContent = numberB;
+                display.value = numberB;
             }
             break;
         case "operator":
@@ -113,7 +115,7 @@ function handleButtonPress(type, value) {
             if (!operatorSet) {
 
                 updateActiveOperator(value);
-                //display.textContent += value;
+                //display.value += value;
                 break;
             };
 
@@ -139,15 +141,15 @@ function handleButtonPress(type, value) {
         case "decimal":
             if (!operatorSet) {
                 if (decimalA) { break };
-                display.textContent = "";
+                display.value = "";
                 numberA += ".";
-                display.textContent = numberA;
+                display.value = numberA;
                 decimalA = true
             } else {
                 if (decimalB) { break };
-                display.textContent = "";
+                display.value = "";
                 numberB += ".";
-                display.textContent = numberB;
+                display.value = numberB;
                 decimalB = true;
             }
             break;
@@ -161,22 +163,24 @@ function clearScreen() {
     result = null;
     decimalA = false;
     decimalB = false;
-    display.textContent = "";
+    display.value = "";
+    displayEq.value = "";
+
     clearOperatorActive();
 
 };
 
 function deleteLast() {
     if (!operatorSet) {
-        display.textContent = "";
+        display.value = "";
         if ((numberA.charAt(numberA.length - 1)) === ".") { decimalA = false };
         numberA = numberA.slice(0, -1);
-        display.textContent = numberA;
+        display.value = numberA;
     } else {
-        display.textContent = "";
+        display.value = "";
         if ((numberB.charAt(numberB.length - 1)) === ".") { decimalB = false };
         numberB = numberB.slice(0, -1);
-        display.textContent = numberB;
+        display.value = numberB;
     }
 };
 
@@ -185,7 +189,7 @@ function updateActiveOperator(op) {
     operator = op;
     operatorSet = true;
     console.log(`Operator: ${operator}`);
-    display.textContent = "";
+    
 
     switch (operator) {
         case "+":
@@ -209,5 +213,4 @@ function clearOperatorActive() {
     subtractBtn.classList.remove("active")
     multiplyBtn.classList.remove("active")
     divideBtn.classList.remove("active")
-
 }
