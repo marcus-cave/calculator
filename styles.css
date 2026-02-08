@@ -108,6 +108,10 @@ button:hover {
     opacity: 80%;
 }
 
+button:active {
+    transform: scale(0.98);
+}
+
 #equal {
     width: 210px;
     border-radius: 5px;

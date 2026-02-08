@@ -94,7 +94,7 @@ function handleButtonPress(type, value) {
                 numberA += value;
                 display.value = numberA;
             } else {
-                displayEq.value = "";
+                
                 display.value = "";
                 numberB += value;
                 display.value = numberB;
@@ -189,6 +189,8 @@ function updateActiveOperator(op) {
     operator = op;
     operatorSet = true;
     console.log(`Operator: ${operator}`);
+    displayEq.value = `${numberA} ${operator}`
+    display.value = "";
     
 
     switch (operator) {
