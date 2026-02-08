@@ -3,7 +3,10 @@ let numberB = "";
 let operator = "";
 let result
 let operatorSet = false;
+let decimalA = false;
+let decimalB = false;
 
+//Operation Functions
 function add(a, b) {
     return a + b;
 };
@@ -24,6 +27,18 @@ function operate(a, operator, b) {
 
     a = parseFloat(a);
     b = parseFloat(b);
+
+    if (isNaN(a) || isNaN(b)) {
+        clearScreen();
+        display.textContent = "ERROR";
+        return;
+    };
+
+    if (operator === "/" || b === 0) {
+        clearScreen();
+        display.textContent = "ERROR - !DIV 0";
+        return;
+    };
 
     switch (operator) {
         case "+":
@@ -47,10 +62,7 @@ function operate(a, operator, b) {
 
     clearOperatorActive();
     display.textContent = result;
-
     operatorSet = false;
-
-
 
     return result;
 };
@@ -83,10 +95,7 @@ function handleButtonPress(type, value) {
             }
             break;
         case "operator":
-            if (!numberA && !result) {
-                console.log("NO numA or RESULT")
-                break;
-            }
+            if (!numberA && !result) { break; }
 
             if (!numberA) {
                 console.log("TEST")
@@ -123,6 +132,21 @@ function handleButtonPress(type, value) {
         case "delete":
             deleteLast();
             break;
+        case "decimal":
+            if (!operatorSet) {
+                if (decimalA) { break };
+                display.textContent = "";
+                numberA += ".";
+                display.textContent = numberA;
+                decimalA = true
+            } else {
+                if (decimalB) { break };
+                display.textContent = "";
+                numberB += ".";
+                display.textContent = numberB;
+                decimalB = true;
+            }
+            break;
     }
 };
 
@@ -131,6 +155,8 @@ function clearScreen() {
     numberB = "";
     operator = "";
     result = null;
+    decimalA = false;
+    decimalB = false;
     display.textContent = "";
     clearOperatorActive();
 
@@ -139,10 +165,12 @@ function clearScreen() {
 function deleteLast() {
     if (!operatorSet) {
         display.textContent = "";
+        if ((numberA.charAt(numberA.length - 1)) === ".") { decimalA = false };
         numberA = numberA.slice(0, -1);
         display.textContent = numberA;
     } else {
         display.textContent = "";
+        if ((numberB.charAt(numberB.length - 1)) === ".") { decimalB = false };
         numberB = numberB.slice(0, -1);
         display.textContent = numberB;
     }
