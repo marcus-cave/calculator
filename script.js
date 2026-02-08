@@ -214,3 +214,45 @@ function clearOperatorActive() {
     multiplyBtn.classList.remove("active")
     divideBtn.classList.remove("active")
 }
+
+//Keyboard Support
+const keys = {
+    1: "1",
+    2: "2",
+    3: "3",
+
+}
+
+const numbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"];
+const operators = ["+", "-", "/", "*"];
+
+document.addEventListener("keydown", (e) => {
+    console.log(e.key);
+
+    if (numbers.includes(e.key)){
+        handleButtonPress("number", e.key);
+        return;
+    };
+    if (operators.includes(e.key)){
+        handleButtonPress("operator", e.key);
+        return;
+    };
+    if (e.key === ".") {
+        handleButtonPress("decimal", e.key);
+        return;
+    };
+    if (e.key === "Backspace"){
+        handleButtonPress("delete", "delete");
+        return;
+    };
+    if (e.key === "Enter"){
+        handleButtonPress("equal", "equal");
+        return;
+    }
+    if (e.key === "Clear"){
+        handleButtonPress("clear", "clear");
+        return;
+    }
+});
+
+
