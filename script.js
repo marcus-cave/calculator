@@ -59,6 +59,8 @@ function operate(a, operator, b) {
     numberB = "";
 
     console.log(`${a} ${operator} ${b} = ${result}`)
+    displayEq.textContent = `${a} ${operator} ${b}`;
+
 
     clearOperatorActive();
     display.textContent = result;
@@ -68,6 +70,8 @@ function operate(a, operator, b) {
 };
 
 const display = document.querySelector("#display");
+const displayEq = document.querySelector("#displayEq");
+
 const buttons = document.querySelectorAll("button");
 
 const addBtn = document.querySelector("button[value='+']");
