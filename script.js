@@ -59,7 +59,7 @@ function operate(a, operator, b) {
     numberB = "";
 
     console.log(`${a} ${operator} ${b} = ${result}`)
-    displayEq.value = `${a} ${operator} ${b}`;
+    displayEq.value = `${a} ${operator} ${b} =`;
 
 
     clearOperatorActive();
